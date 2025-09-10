@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+#include <random>
 
 class HNSW{
     public:
@@ -56,6 +57,10 @@ class HNSW{
         bool use_heuristic_;
 
         // Level generation parameters
+        std::mt19937 rng_; // this is just a random number generator
+        std::uniform_real_distribution<float> distribution_{1e-6, 1.0-1e-6}; // uniform distribution between e^-6 and 1-e^-6
+        // because log(0) is undefined and we want to avoid it, also avoid 1 to prevent log(1)=0
+        // the reason we avoid 1 is that log(1) = 0, and assigns the lowest level possible and affects the distribution
         double mult_; // normalization factor for level generation, defaults to 1/ln(M)
 
         // Graph structure

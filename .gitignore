@@ -44,3 +44,6 @@ Thumbs.db
 *.su
 *.idb
 *.pdb
+
+# Additional files for project tracking
+PLAN.md
